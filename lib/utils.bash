@@ -82,8 +82,8 @@ download_release() {
 	filename="$2"
 
 	architecture="$(arch)"
-	os=get_os
-	ext=get_ext
+	os=$(get_os)
+	ext=$(get_ext)
 
 	url="$GH_REPO/releases//download/v${version}/$TOOL_NAME-v${version}-${architecture}-${os}.${ext}"
 
