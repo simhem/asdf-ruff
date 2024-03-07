@@ -105,8 +105,6 @@ install_version() {
 		
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 
-		echo $install_path
-
 		# Assert ruff executable exists.
 		local tool_cmd
 		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
