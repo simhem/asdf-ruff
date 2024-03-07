@@ -102,8 +102,12 @@ install_version() {
 
 	(
 		mkdir -p "$install_path"
-		ls -al $ASDF_DOWNLOAD_PATH
+		
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
+
+		ls -al $ASDF_DOWNLOAD_PATH
+		echo $install_path
+		ls -al $install_path
 
 		# Assert ruff executable exists.
 		local tool_cmd
