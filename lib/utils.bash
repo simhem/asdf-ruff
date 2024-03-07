@@ -37,13 +37,13 @@ list_all_versions() {
 get_os() {
 		case "$OSTYPE" in
 		darwin*) 
-		  return "apple-darwin" ;;
+		  echo "apple-darwin" ;;
 		linux*)   
-		  return "unknow-linux-gnu" ;;
+		  echo "unknow-linux-gnu" ;;
 		msys*)    
-		  return "pc-windows-msvc" ;;
+		  echo "pc-windows-msvc" ;;
 		cygwin*)  
-		  return "pc-windows-msvc" ;;
+		  echo "pc-windows-msvc" ;;
 		*)        
 		  echo "OS type is not supported"
 		  exit 1 ;;
@@ -53,13 +53,13 @@ get_os() {
 get_ext() {
 		case "$OSTYPE" in
 		darwin*) 
-		  return "tar.gz" ;;
+		  echo "tar.gz" ;;
 		linux*)   
-		  return "tar.gz" ;;
+		  echo "tar.gz" ;;
 		msys*)    
-		  return "zip" ;;
+		  echo "zip" ;;
 		cygwin*)  
-		  return "zip" ;;
+		  echo "zip" ;;
 		*)        
 		  echo "OS type is not supported"
 		  exit 1 ;;
@@ -72,8 +72,8 @@ download_release() {
 	filename="$2"
 
 	architecture="$(arch)"
-	os= get_os
-	ext= get_ext
+	os=get_os
+	ext=get_ext
 
 	url="$GH_REPO/releases//download/v${version}/$TOOL_NAME-v${version}-${architecture}-${os}.${ext}"
 
