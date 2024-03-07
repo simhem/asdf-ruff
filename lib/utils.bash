@@ -94,7 +94,7 @@ download_release() {
 install_version() {
 	local install_type="$1"
 	local version="$2"
-	local install_path="${3%/bin}"
+	local install_path="${3%/bin}/bin"
 
 	if [ "$install_type" != "version" ]; then
 		fail "asdf-$TOOL_NAME supports release installs only"
@@ -105,9 +105,7 @@ install_version() {
 		
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 
-		ls -al $ASDF_DOWNLOAD_PATH
 		echo $install_path
-		ls -al $install_path
 
 		# Assert ruff executable exists.
 		local tool_cmd
