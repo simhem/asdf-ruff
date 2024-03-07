@@ -40,7 +40,7 @@ get_os() {
 		echo "apple-darwin" 
 		;;
 	linux*)   
-		echo "unknow-linux-gnu"
+		echo "unknown-linux-gnu"
 		;;
 	msys*)    
 		echo "pc-windows-msvc" 
@@ -85,7 +85,7 @@ download_release() {
 	os=$(get_os)
 	ext=$(get_ext)
 
-	url="$GH_REPO/releases//download/v${version}/$TOOL_NAME-v${version}-${architecture}-${os}.${ext}"
+	url="$GH_REPO/releases//download/v${version}/$TOOL_NAME-${version}-${architecture}-${os}.${ext}"
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
