@@ -35,34 +35,44 @@ list_all_versions() {
 }
 
 get_os() {
-		case "$OSTYPE" in
-		darwin*) 
-		  echo "apple-darwin" ;;
-		linux*)   
-		  echo "unknow-linux-gnu" ;;
-		msys*)    
-		  echo "pc-windows-msvc" ;;
-		cygwin*)  
-		  echo "pc-windows-msvc" ;;
-		*)        
-		  echo "OS type is not supported"
-		  exit 1 ;;
+	case "$OSTYPE" in
+	darwin*) 
+		echo "apple-darwin" 
+		;;
+	linux*)   
+		echo "unknow-linux-gnu"
+		;;
+	msys*)    
+		echo "pc-windows-msvc" 
+		;;
+	cygwin*)  
+		echo "pc-windows-msvc" 
+		;;
+	*)        
+		echo "OS type is not supported"
+		exit 1 
+		;;
     esac
 }
 
 get_ext() {
-		case "$OSTYPE" in
-		darwin*) 
-		  echo "tar.gz" ;;
-		linux*)   
-		  echo "tar.gz" ;;
-		msys*)    
-		  echo "zip" ;;
-		cygwin*)  
-		  echo "zip" ;;
-		*)        
-		  echo "OS type is not supported"
-		  exit 1 ;;
+	case "$OSTYPE" in
+	darwin*) 
+		echo "tar.gz" 
+		;;
+	linux*)   
+		echo "tar.gz" 
+		;;
+	msys*)    
+		echo "zip" 
+		;;
+	cygwin*)  
+		echo "zip" 
+		;;
+	*)        
+		echo "OS type is not supported"
+		exit 1 
+		;;
     esac
 }
 
