@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for ruff.
 GH_REPO="https://github.com/astral-sh/ruff"
 TOOL_NAME="ruff"
 TOOL_TEST="ruff --help"
@@ -31,9 +30,40 @@ list_github_tags() {
 }
 
 list_all_versions() {
-	# TODO: Adapt this. By default we simply list the tag names from GitHub releases.
 	# Change this function if ruff has other means of determining installable versions.
 	list_github_tags
+}
+
+get_os() {
+		case "$OSTYPE" in
+		darwin*) 
+		  return "apple-darwin" ;;
+		linux*)   
+		  return "unknow-linux-gnu" ;;
+		msys*)    
+		  return "pc-windows-msvc" ;;
+		cygwin*)  
+		  return "pc-windows-msvc" ;;
+		*)        
+		  echo "OS type is not supported"
+		  exit 1 ;;
+    esac
+}
+
+get_ext() {
+		case "$OSTYPE" in
+		darwin*) 
+		  return "tar.gz" ;;
+		linux*)   
+		  return "tar.gz" ;;
+		msys*)    
+		  return "zip" ;;
+		cygwin*)  
+		  return "zip" ;;
+		*)        
+		  echo "OS type is not supported"
+		  exit 1 ;;
+    esac
 }
 
 download_release() {
@@ -41,8 +71,11 @@ download_release() {
 	version="$1"
 	filename="$2"
 
-	# TODO: Adapt the release URL convention for ruff
-	url="$GH_REPO/archive/v${version}.tar.gz"
+	architecture="$(arch)"
+	os= get_os
+	ext= get_ext
+
+	url="$GH_REPO/releases//download/v${version}/$TOOL_NAME-v${version}-${architecture}-${os}.${ext}"
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
@@ -61,7 +94,7 @@ install_version() {
 		mkdir -p "$install_path"
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 
-		# TODO: Assert ruff executable exists.
+		# Assert ruff executable exists.
 		local tool_cmd
 		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
 		test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
