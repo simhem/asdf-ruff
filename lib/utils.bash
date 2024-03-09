@@ -36,44 +36,44 @@ list_all_versions() {
 
 get_os() {
 	case "$OSTYPE" in
-	darwin*) 
-		echo "apple-darwin" 
+	darwin*)
+		echo "apple-darwin"
 		;;
-	linux*)   
+	linux*)
 		echo "unknown-linux-gnu"
 		;;
-	msys*)    
-		echo "pc-windows-msvc" 
+	msys*)
+		echo "pc-windows-msvc"
 		;;
-	cygwin*)  
-		echo "pc-windows-msvc" 
+	cygwin*)
+		echo "pc-windows-msvc"
 		;;
-	*)        
+	*)
 		echo "OS type is not supported"
-		exit 1 
+		exit 1
 		;;
-    esac
+	esac
 }
 
 get_ext() {
 	case "$OSTYPE" in
-	darwin*) 
-		echo "tar.gz" 
+	darwin*)
+		echo "tar.gz"
 		;;
-	linux*)   
-		echo "tar.gz" 
+	linux*)
+		echo "tar.gz"
 		;;
-	msys*)    
-		echo "zip" 
+	msys*)
+		echo "zip"
 		;;
-	cygwin*)  
-		echo "zip" 
+	cygwin*)
+		echo "zip"
 		;;
-	*)        
+	*)
 		echo "OS type is not supported"
-		exit 1 
+		exit 1
 		;;
-    esac
+	esac
 }
 
 download_release() {
@@ -102,7 +102,7 @@ install_version() {
 
 	(
 		mkdir -p "$install_path"
-		
+
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 
 		# Assert ruff executable exists.
