@@ -84,6 +84,12 @@ download_release() {
 	architecture="$(arch)"
 	os=$(get_os)
 	ext=$(get_ext)
+        if [ "$os" == "apple-darwin" ]; then
+	    if [ "$architecture" == "arm64" ]; then
+                architecture="aarch64"
+            fi
+	fi
+        
 
 	url="$GH_REPO/releases//download/v${version}/$TOOL_NAME-${version}-${architecture}-${os}.${ext}"
 
