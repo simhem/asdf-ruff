@@ -84,14 +84,17 @@ download_release() {
 	architecture="$(arch)"
 	os=$(get_os)
 	ext=$(get_ext)
-        if [ "$os" == "apple-darwin" ]; then
-	    if [ "$architecture" == "arm64" ]; then
-                architecture="aarch64"
-            fi
+	if [ "$os" == "apple-darwin" ]; then
+		if [ "$architecture" == "arm64" ]; then
+			architecture="aarch64"
+		fi
 	fi
-        
 
-	url="$GH_REPO/releases//download/v${version}/$TOOL_NAME-${version}-${architecture}-${os}.${ext}"
+	if [[ "$version" < "0.5.0" ]]; then
+		url="$GH_REPO/releases//download/v${version}/$TOOL_NAME-${version}-${architecture}-${os}.${ext}"
+	else
+		url="$GH_REPO/releases//download/${version}/$TOOL_NAME-${architecture}-${os}.${ext}"
+	fi
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
