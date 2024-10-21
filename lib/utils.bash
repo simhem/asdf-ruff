@@ -81,7 +81,7 @@ download_release() {
 	version="$1"
 	filename="$2"
 
-	architecture="$(arch)"
+	architecture="$(uname -m)"
 	os=$(get_os)
 	ext=$(get_ext)
 	if [ "$os" == "apple-darwin" ]; then
