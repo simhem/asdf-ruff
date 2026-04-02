@@ -76,6 +76,10 @@ get_ext() {
 	esac
 }
 
+version_lt() {
+	test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" != "$1"
+}
+
 download_release() {
 	local version filename url
 	version="$1"
@@ -90,7 +94,7 @@ download_release() {
 		fi
 	fi
 
-	if [[ "$version" < "0.5.0" ]]; then
+	if version_lt "$version" "0.5.0"; then
 		url="$GH_REPO/releases//download/v${version}/$TOOL_NAME-${version}-${architecture}-${os}.${ext}"
 	else
 		url="$GH_REPO/releases//download/${version}/$TOOL_NAME-${architecture}-${os}.${ext}"
